@@ -18,7 +18,7 @@ int getUserInput()
     cout << "Ingrese un numero: ";
     int x{};
     cin >> x;
-    return --x;
+    return x;
 
 }
 int main()
