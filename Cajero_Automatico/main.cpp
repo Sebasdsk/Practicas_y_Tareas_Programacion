@@ -4,8 +4,8 @@
 #include <cstdlib>
 
 void menu();
-//float retirar(float x, float y);
-//float depositar(float x, float y);
+float validarDato(); 
+
 
 #define ENTER 13
 #define BACKSPACE 8
@@ -106,6 +106,7 @@ int main() //en la funcion main se va a crear un menu que despliegara mas funcio
                
                 menu();
                 opc = 0;
+                validarDato(); 
                 std::cin >> opc;
                 switch (opc)
                 {
@@ -248,4 +249,34 @@ void menu()
                  "5. Transferencia \n"  << "6. Ultimos Movimientos \n" <<"7. Salir de la Sesion \n" << "8.Terminar Programa \n";
     std::cout << "\n";
 
+}
+
+float validarDato() 
+{
+    float datoleido(0);
+    
+    do
+    {
+        std::cin>>datoleido;
+
+        while (datoleido<0) //Por si ingresa un numero negativo
+        {
+            std::cout<<"\n\t\t\t\t\tError, Vuelva a intentar: ";
+            std::cin>>datoleido;
+        }
+
+        if (std::cin.fail()==true) //Por si ingresa una letra
+        {
+            std::cin.clear();
+            std::cin.ignore(1000,'\n');
+            std::cout<<"\n\t\t\t\t\tError, Vuelva a intentar: ";
+        }
+        else
+        {
+            break;
+        }
+        
+    } while (true);
+
+    return datoleido;
 }
