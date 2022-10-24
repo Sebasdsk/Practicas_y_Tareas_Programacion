@@ -3,8 +3,11 @@
 #include <conio.h>        
 #include <cstdlib>
 
-void menu();
-  
+
+void menuVentas();
+float validarDato();
+void mostrarProductos();
+ 
 //Declarando estructuras y sus datos predefinidos para el programa:
 
 struct Producto  //Datos para los productos 
@@ -20,14 +23,7 @@ struct Cliente  // Datos para los clientes
         int identificadorC;
         std::string Nombre;
         double creditoMax,credito,adeudo;
-    }clientes[10];
-
-char confirmacion = 'N'; //Variable que se utiliza a la hora de hacer confirmaciones en ciclos
-
-void agregarProductos(Producto productos[], int nP);
-void agregarClientes(Cliente clientes[], int nC);    
-int main()
-{
+    };
     //Variables con las estructuras para clientes
     Producto productos[10]=
     {  //Datos de los productos
@@ -46,53 +42,68 @@ int main()
     
     Cliente cientes[10]=
     {
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {}
+        //ID, Nombre, Credito Max, Credito Actual, Adeudo
+        {1,"Roberto Rubio",500,0,0},
+        {2,"Geovanny Ayala",500,0,0},
+        {3,"Carlos Garcia",250,0,0},
+        {4,"Jesus Quintero",500,0,0},
+        {5,"Daniel Meza",500,0,0},
+        {6,"Daniela Rodriguez",500,0,0},
+        {7,"Hugo Sanchez",500,0,0},
+        {8,"Sofia Blancas",500,0,0},
+        {9,"Amayrani Lara",500,0,0},
+        {10,"Laura Beltran",500,0,0}
     };
+
+
+char confirmacion = 'N'; //Variable que se utiliza a la hora de hacer confirmaciones en ciclos
+
+void agregarProductos(Producto productos[], int nP);
+void agregarClientes(Cliente clientes[], int nC);    
+int main()
+{
+    
     int opcion{0};
 
-    int productoBusqueda;
+    int productoBusqueda{0};
     
 
     int nP = 0;                                 // nP = "Numero de productos"
     int nC = 0;                                 // nC = "Numero de Clientes"
-    std::cout << "Bienvenido al Abarrote FIM ";
+    std::cout << "Bienvenido al Abarrote FIM \n";
+    
+     // Menu para venta y clientes
     do
     {
-        menu();
+        menuVentas();
+        int opcion{0};
         std::cin >> opcion;
 
                 switch (opcion)
                 {
                     case 1:
-                        agregarProductos(productos,nP);
-                        system("cls");
+                        mostrarProductos();
+                        getch();
                         break;
-                    
                     case 2:
-
+                    agregarProductos(productos,nP);
+                    system("cls");
                     case 6:
 
 
                     break;
                     default:
+
                     break;
                 }
 
     } while (opcion != 6);
+    
     getch();
     return 0;
 }
-
-// Funcion pendiente para buscar clientes
+//funcion pendiente para buscar clientes
+#if 0
 bool busquedaClientes(Cliente clientes[], int nC)
 {
     int clienteBusqueda;
@@ -110,8 +121,8 @@ bool busquedaClientes(Cliente clientes[], int nC)
         }
     return false;
 }
-
-
+#endif
+// funcion pendiente para hacer las ventas
 #if 0
  // funcion pendiente para hacer las ventas
 float registroVenta(Cliente clientes[], Producto productos[], int i, int pBusqueda, int nProductos)
@@ -135,6 +146,7 @@ float registroVenta(Cliente clientes[], Producto productos[], int i, int pBusque
     }
 }
 #endif
+
 void agregarProductos(Producto productos[], int nP)         // Funcion para agregar productos al sistema
 {
     confirmacion = 'N';
@@ -170,11 +182,54 @@ void agregarClientes(Cliente clientes[], int nC)           // Funcion para agreg
 }
 
 
-void menu()
+void menuVentas()
 {
     std::cout << "\n";
     std::cout << "\n Elija lo que desea realizar: \n";
-    std::cout << "1. Venta \n" << "2. Registrar Productos \n"<< "3. Consultar Ventas \n"<< "4. Agregar Clientes \n"; 
+    std::cout << "1.Mostrar Productos \n" << "2. Venta \n" << "3. Registrar Productos \n"<< "4. Agregar Clientes \n"; 
     std::cout << "\n";
 
+}
+
+
+void mostrarProductos()   // Funcion para mostrar los productos que hay:
+{
+    std::cout << "Productos disponibles: \n";
+    for(int i = 0; i <= sizeof(productos); i++)
+    {
+        std::cout << "Descripcion: " << productos[i].descripcion << "\n";
+        std::cout << "Cantidad Disponible: " << productos[i].numArticulos << "\n";
+        std::cout << "Precio: " << productos[i].precioVenta << " Pesos \n";
+        std::cout << "\n";
+    }
+}
+
+float validarDato() 
+{
+    float datoleido(0);
+    
+    do
+    {
+        std::cin>>datoleido;
+
+        while (datoleido<0) //Por si ingresa un numero negativo
+        {
+            std::cout<<"\n\t\t\t\t\tError, Vuelva a intentar: ";
+            std::cin>>datoleido;
+        }
+
+        if (std::cin.fail()==true) //Por si ingresa una letra
+        {
+            std::cin.clear();
+            std::cin.ignore(1000,'\n');
+            std::cout<<"\n\t\t\t\t\tError, Vuelva a intentar: ";
+        }
+        else
+        {
+            break;
+        }
+        
+    } while (true);
+
+    return datoleido;
 }
