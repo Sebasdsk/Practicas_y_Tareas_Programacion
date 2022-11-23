@@ -1,6 +1,6 @@
 #include <iostream>       
 #include <string>
-#include <conio.h>        //getch()
+#include <conio.h>     //getch()
 #include <cstdlib>
 
 void menu();
