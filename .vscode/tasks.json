@@ -50,7 +50,7 @@
         },
         {
             "type": "cppbuild",
-            "label": "C/C++: g++ compilar archivo activo",
+            "label": "Compilar en Linux",
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
@@ -67,7 +67,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "detail": "Tarea generada por el depurador."
         }
